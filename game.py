@@ -20,6 +20,9 @@ snake = [(300,300),(310,300),(320,300)]
 snake_skin = pygame.Surface((10,10))
 snake_skin.fill((255,255,255))
 
+font = pygame.font.Font('freesansbold.ttf', 18)
+score = 0
+
 def on_grid_random():
     x = random.randint(0,59)
     y = random.randint(0,59)
@@ -34,7 +37,7 @@ apple = pygame.Surface((10,10))
 apple.fill((255,0,0))
 
 while True:
-    clock_time = 10
+    clock_time = 10 + (score/2)
     clock.tick(clock_time)
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -54,9 +57,7 @@ while True:
     if collision(snake[0],apple_pos):
         apple_pos = on_grid_random()
         snake.append((0,0))
-        # DEV
-        for i in range(10):
-            snake.append((0,0))
+        score = score + 1
     
     if snake[0][0] == 600 or snake[0][0] == 0 or snake[0][0] < 0 or snake[0][1] < 0 or snake[0][1] == 600 :
         pygame.quit()
@@ -82,10 +83,10 @@ while True:
 
     screen.fill((0,0,0))
     screen.blit(apple,apple_pos)
-
-    for x in range(0, 600, 10):
-        pygame.draw.line(screen, (40,40,40), (x,0), (x,600))
-        pygame.draw.line(screen, (40,40,40), (0,x), (600,x))
+    score_font = font.render('Score: %s'%(score), True,(255,255,255))
+    score_rect = score_font.get_rect()
+    score_rect.topright = (600 - 20, 10)
+    screen.blit(score_font,score_rect)
 
     for pos in snake:
         screen.blit(snake_skin,pos)
