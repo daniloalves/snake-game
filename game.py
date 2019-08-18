@@ -41,13 +41,13 @@ while True:
             pygame.quit()
             exit()
         if event.type == KEYDOWN:
-            if event.key == K_UP:
+            if event.key == K_UP and my_direction != DOWN:
                 my_direction = UP
-            if event.key == K_DOWN:
+            if event.key == K_DOWN and my_direction != UP:
                 my_direction = DOWN
-            if event.key == K_RIGHT:
+            if event.key == K_RIGHT and my_direction != LEFT:
                 my_direction = RIGHT
-            if event.key == K_LEFT:
+            if event.key == K_LEFT and my_direction != RIGHT:
                 my_direction = LEFT
     if collision(snake[0],apple_pos):
         apple_pos = on_grid_random()
