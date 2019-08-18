@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+import random
 
 UP = 0
 RIGHT = 1
@@ -18,6 +19,16 @@ pygame.display.set_caption('Snake')
 snake = [(300,300),(310,300),(320,300)]
 snake_skin = pygame.Surface((10,10))
 snake_skin.fill((255,255,255))
+
+def on_grid_random():
+    x = random.randint(0,590)
+    y = random.randint(0,590)
+
+    return (x, y)
+
+apple_pos = on_grid_random()
+apple = pygame.Surface((10,10))
+apple.fill((255,0,0))
 
 while True:
     clock_time = 10
@@ -50,6 +61,7 @@ while True:
 
 
     screen.fill((0,0,0))
+    screen.blit(apple,apple_pos)
     for pos in snake:
         screen.blit(snake_skin,pos)
 
