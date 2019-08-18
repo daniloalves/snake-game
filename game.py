@@ -26,6 +26,9 @@ def on_grid_random():
 
     return (x * 10, y * 10)
 
+def collision(c1, c2):
+    return (c1[0] == c2[0]) and (c1[1] == c2[1])
+
 apple_pos = on_grid_random()
 apple = pygame.Surface((10,10))
 apple.fill((255,0,0))
@@ -46,7 +49,9 @@ while True:
                 my_direction = RIGHT
             if event.key == K_LEFT:
                 my_direction = LEFT
-
+    if collision(snake[0],apple_pos):
+        apple_pos = on_grid_random()
+        snake.append((0,0))
     for i in range(len(snake) - 1, 0, -1):
         snake[i] = (snake[i-1][0],snake[i-1][1])
 
