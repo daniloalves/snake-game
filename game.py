@@ -91,5 +91,4 @@ while True:
     for pos in snake:
         screen.blit(snake_skin,pos)
 
-
     pygame.display.update()
