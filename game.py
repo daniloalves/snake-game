@@ -8,6 +8,8 @@ LEFT = 3
 
 my_direction = LEFT
 
+clock = pygame.time.Clock()
+
 pygame.init()
 
 screen = pygame.display.set_mode((600,600))
@@ -18,6 +20,8 @@ snake_skin = pygame.Surface((10,10))
 snake_skin.fill((255,255,255))
 
 while True:
+    clock_time = 10
+    clock.tick(clock_time)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -39,9 +43,9 @@ while True:
         snake[0] = (snake[0][0], snake[0][1] - 10)
     if my_direction == DOWN:
         snake[0] = (snake[0][0], snake[0][1] + 10)
-    if my_direction == RIGHT:
-        snake[0] = (snake[0][0] - 10, snake[0][1])
     if my_direction == LEFT:
+        snake[0] = (snake[0][0] - 10, snake[0][1])
+    if my_direction == RIGHT:
         snake[0] = (snake[0][0] + 10, snake[0][1])
 
 
