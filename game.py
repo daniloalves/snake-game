@@ -40,6 +40,7 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             exit()
+
         if event.type == KEYDOWN:
             if event.key == K_UP and my_direction != DOWN:
                 my_direction = UP
@@ -49,9 +50,19 @@ while True:
                 my_direction = RIGHT
             if event.key == K_LEFT and my_direction != RIGHT:
                 my_direction = LEFT
+
     if collision(snake[0],apple_pos):
         apple_pos = on_grid_random()
         snake.append((0,0))
+    
+    if snake[0][0] == 600 or snake[0][0] == 0 or snake[0][0] < 0 or snake[0][1] < 0 or snake[0][1] == 600 :
+        pygame.quit()
+        exit()
+
+    if snake[0][0] == snake[0][1]:
+        pygame.quit()
+        exit()
+
     for i in range(len(snake) - 1, 0, -1):
         snake[i] = (snake[i-1][0],snake[i-1][1])
 
